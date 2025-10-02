@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NETTECH 2 Final Grade Calculator for Prelims by Sir Sam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      margin-bottom: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h3 {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      background: #007bff;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #result {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #e9ecef;
+      border-radius: 6px;
+      font-size: clamp(0.95rem, 2.5vw, 1rem);
+    }
+    .highlight {
+      font-weight: bold;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      margin-top: 10px;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      form {
+        padding: 15px;
+      }
+      button {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>NETTECH 2 Final Grade Calculator for Prelims by Sir Sam</h1>
+  <form id="gradeForm">
+    <h3>Laboratory Exercises/Performance Tasks (30%)</h3>
+    <label for="pt1">01 Laboratory Exercise 1 (Max 50)</label>
+    <input type="number" id="pt1" max="50" min="0" required>
+    <label for="pt2">02 Performance Task 1 (Max 50)</label>
+    <input type="number" id="pt2" max="50" min="0" required>
+
+    <h3>Activities/Quizzes (20%)</h3>
+    <label for="q1">01 Seatwork 1 (Max 10)</label>
+    <input type="number" id="q1" max="10" min="0" required>
+    <label for="q2">01 Quiz 1 (Max 10)</label>
+    <input type="number" id="q2" max="10" min="0" required>
+    <label for="q3">02 Quiz 1 (Max 20)</label>
+    <input type="number" id="q3" max="10" min="0" required>
+
+    <h3>Exam (50%)</h3>
+    <label for="exam">Prelim Exam (Max 70)</label>
+    <input type="number" id="exam" max="70" min="0" required>
+
+    <button type="button" onclick="calculateGrade()">Calculate Final Grade</button>
+  </form>
+
+  <div id="result"></div>
+
+    <div style="max-width:600px; margin:20px auto; text-align:center;">
+    <a href="../hci.html" class="nav-btn">⬅️ Switch Checkpoint</a>
+  </div>
+
+  <script>
+    function calculateGrade() {
+      // Performance Tasks
+      let pt1 = parseFloat(document.getElementById("pt1").value) || 0;
+      let pt2 = parseFloat(document.getElementById("pt2").value) || 0;
+
+      let ptTotal = pt1 + pt2;
+      let ptMax = 50 + 50; // 100;
+      let ptPercent = (ptTotal / ptMax) * 100;
+      let ptWeighted = ptPercent * 0.30;
+
+      // Quizzes (equal weight per quiz)
+      let q1 = parseFloat(document.getElementById("q1").value) || 0;
+      let q2 = parseFloat(document.getElementById("q2").value) || 0;
+      let q3 = parseFloat(document.getElementById("q3").value) || 0;
+
+      let q1Percent = (q1 / 10) * 100;
+      let q2Percent = (q2 / 10) * 100;
+      let q3Percent = (q3 / 20) * 100;
+
+      // Quizzes average of percentages
+      let qPercent = (q1Percent + q2Percent + q3Percent) / 3;
+      let qWeighted = qPercent * 0.20;
+
+      // Exam
+      let exam = parseFloat(document.getElementById("exam").value) || 0;
+      let examMax = 70;
+      let examPercent = (exam / examMax) * 100;
+      let examWeighted = examPercent * 0.50;
+
+      // Final Grade Calculation
+      let finalGrade = ptWeighted + qWeighted + examWeighted;
+
+      document.getElementById("result").innerHTML = `
+        <p>Performance Tasks (30%): ${ptPercent.toFixed(2)}% → Weighted: <b>${ptWeighted.toFixed(2)}%</b></p>
+        <p>Quizzes (20%): ${qPercent.toFixed(2)}% → Weighted: <b>${qWeighted.toFixed(2)}%</b></p>
+        <p>Exam (50%): ${examPercent.toFixed(2)}% → Weighted: <b>${examWeighted.toFixed(2)}%</b></p>
+        <p class="highlight">Final Grade: ${finalGrade.toFixed(2)}%</p>
+      `;
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
