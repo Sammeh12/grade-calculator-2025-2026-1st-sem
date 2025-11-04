@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ITC Final Grade Calculator for Midterms by Sir Sam</title>
+  <title>HCI Final Grade Calculator for Prefinals by Sir Sam</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -86,23 +86,25 @@
   </style>
 </head>
 <body>
-  <h1>ITC Final Grade Calculator for Midterms by Sir Sam</h1>
+  <h1>HCI Final Grade Calculator for Prefinals by Sir Sam</h1>
   <form id="gradeForm">
     <h3>Laboratory Exercises/Performance Tasks (30%)</h3>
-    <label for="pt1">03 Laboratory Exercise 1 (Max 50)</label>
-    <input type="number" id="pt1" max="50" min="0" required>
-    <label for="pt2">04 Laboratory Exercise 1 (Max 60)</label>
-    <input type="number" id="pt2" max="60" min="0" required>
-    <label for="pt3">04 Task Performance 1 (Max 50)</label>
-    <input type="number" id="pt3" max="50" min="0" required>
+    <label for="pt1">06 Laboratory Exercise 1 (Max 70)</label>
+    <input type="number" id="pt1" max="70" min="0" required>
+    <label for="pt2">06 Demonstration 1 (Max 100)</label>
+    <input type="number" id="pt2" max="100" min="0" required>
+    <label for="pt3">07 Task Performance 1 (Max 60)</label>
+    <input type="number" id="pt3" max="60" min="0" required>
 
     <h3>Activities/Quizzes (20%)</h3>
-    <label for="q1">03 Assignment 1 (Max 30)</label>
-    <input type="number" id="q1" max="30" min="0" required>
-    <label for="q2">03 Activity 1 (Max 30)</label>
+    <label for="q1">06 eLMS Quiz 1 (Max 20)</label>
+    <input type="number" id="q1" max="20" min="0" required>
+    <label for="q2">07 eLMS Quiz 1 Part A (Max 30)</label>
     <input type="number" id="q2" max="30" min="0" required>
-    <label for="q3">04 eLMS Quiz 1 (Max 30)</label>
-    <input type="number" id="q3" max="30" min="0" required>
+    <label for="q3">07 Long Quiz 1 (Max 100)</label>
+    <input type="number" id="q3" max="100" min="0" required>
+    <label for="q4">07 eLMS Quiz 1 Part B (Max 10)</label>
+    <input type="number" id="q4" max="10" min="0" required>
 
     <h3>Exam (50%)</h3>
     <label for="exam">Midterm Exam (Max 70)</label>
@@ -110,11 +112,10 @@
 
     <button type="button" onclick="calculateGrade()">Calculate Final Grade</button>
   </form>
-
   <div id="result"></div>
 
-    <div style="max-width:600px; margin:20px auto; text-align:center;">
-    <a href="../itc.html" class="nav-btn">⬅️ Switch Checkpoint</a>
+  <div style="max-width:600px; margin:20px auto; text-align:center;">
+    <a href="../hci.html" class="nav-btn">⬅️ Switch Checkpoint</a>
   </div>
 
   <script>
@@ -125,7 +126,7 @@
       let pt3 = parseFloat(document.getElementById("pt3").value) || 0;
 
       let ptTotal = pt1 + pt2 + pt3;
-      let ptMax = 160;
+      let ptMax = 230;
       let ptPercent = (ptTotal / ptMax) * 100;
       let ptWeighted = ptPercent * 0.30;
 
@@ -133,11 +134,13 @@
       let q1 = parseFloat(document.getElementById("q1").value) || 0;
       let q2 = parseFloat(document.getElementById("q2").value) || 0;
       let q3 = parseFloat(document.getElementById("q3").value) || 0;
-      let q1Percent = (q1 / 30) * 100;
+      let q4 = parseFloat(document.getElementById("q4").value) || 0;
+      let q1Percent = (q1 / 20) * 100;
       let q2Percent = (q2 / 30) * 100;
-      let q3Percent = (q3 / 30) * 100;
+      let q3Percent = (q3 / 100) * 100;
+      let q4Percent = (q4 / 10) * 100;
 
-      let qPercent = (q1Percent + q2Percent + q3Percent) / 3;
+      let qPercent = (q1Percent + q2Percent + q3Percent + q4Percent) / 4;
       let qWeighted = qPercent * 0.20;
 
       // Exam
